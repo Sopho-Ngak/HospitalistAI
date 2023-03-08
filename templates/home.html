@@ -1,0 +1,403 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HospitalistAI</title>
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}" type="image/png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'js/pdf.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+    
+
+
+
+
+
+    
+
+    <style>
+        label{
+            font-weight: bold;
+            color: black;
+            font-size: 20px;
+            padding: 10px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+          }
+          nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0275d8 ;
+            color: #fff;
+          }
+        
+          nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 10px;
+          }
+        nav #pass{
+            justify-content: right;
+        }
+          nav #menu-icon {
+            font-size: 2em;
+            cursor: pointer;
+          }
+        
+          /* Make the navigation bar responsive */
+          @media (max-width: 600px) {
+            nav a {
+              display: block;
+            }
+        }
+        
+            nav #menu-icon {
+              display: block;
+            }
+        .logo {
+            max-width: 100%;
+            height: 100px;
+            
+        }
+        html, body {
+          height: 100%;
+          margin: 0;
+        }
+        body {
+            background-color: rgb(222, 228, 236);
+            display: block;
+        }
+        #container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 100px;
+          }
+        
+        
+          #left-div, #right-div {
+            width: 58%;
+            background-color: rgb(241, 236, 236);
+            color: #fff;
+            padding: 20px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+          }
+          #left-div{
+            width: 40%;
+            height: 100%;
+          }
+          #right-div{
+            min-height: 150px;
+            max-height: 100%;
+            position: relative;
+          }
+          
+        
+          /* Make the divs responsive */
+          @media (max-width: 600px) {
+            #container {
+                flex-direction: column;
+              }
+            #left-div, #right-div {
+              width: 90%;
+              display: block;
+              align-self: center;
+              border-radius: 10px;
+            }
+            
+          }
+
+
+      .left-items {
+        display: flex;
+      }
+
+      .right-items {
+        display: flex;
+      }
+      footer {
+        background-color: #cfd4d8;
+        color: #fff;
+        padding: 1px;
+        bottom: 0;
+      }
+      .logo-hospitalist{
+        max-width: 100%; 
+        height: 100%; 
+        display: block;
+        margin: auto;
+      }
+.header-title{
+    font-size: 50px;
+    font-weight: bold;
+    color: #fff;
+    padding: 15px;
+}
+
+@media (max-width: 760px) {
+    nav{
+        height: 70px;
+    }
+    #left-div, #right-div {
+      margin-top: 5px;
+    }
+    .logo{
+        height: 72px;
+    }
+    .header-title{
+        font-size: 30px;
+        font-weight: bold;
+        color: #fff;
+        padding: 15px;
+        margin-left: -10px;
+    }
+}
+
+@media (max-width: 360px) {
+  nav{
+      height: 70px;
+  }
+ 
+  .logo{
+      height: 70px;
+  }
+  .right-items {
+    margin-top: 14px;
+  }
+  .header-title{
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      padding: 15px;
+      margin-left: -10px;
+  }
+}
+
+
+#loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  padding: 20px;
+  border-radius: 10px;
+  display: none;
+}
+
+.spinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin-right: 10px;
+  display: inline-block;
+  margin-left: 30px;
+}
+
+.typing {
+  font-size: 1.2em;
+  color: black;
+  font-weight: bold;
+  font-style: italic;
+  display: inline-block;
+  display: block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+      /* adjust the loader size and position based on screen size */
+@media screen and (max-width: 480px) {
+  #loader {
+    max-width: 80%;
+  }
+  .spinner {
+    width: 20px;
+    height: 20px;
+  }
+  .typing {
+    font-size: 1em;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 600px) {
+  #loader {
+    max-width: 70%;
+  }
+  .spinner {
+    width: 80px;
+    height: 80px;
+  }
+  .typing {
+    font-size: 1.1em;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  #loader {
+    max-width: 70%;
+  }
+  .spinner {
+    width: 80px;
+    height: 80px;
+  }
+  .typing {
+    font-size: 1.1em;
+  }
+}
+textarea {
+  resize: none;
+  overflow: hidden;
+}
+
+
+
+
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        let textarea = document.querySelector('#my-textarea-id');
+        textarea.addEventListener('paste', function() {
+          setTimeout(function() {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+          }, 0);
+        });
+      });
+    </script>
+    
+</head>
+<body>
+    <header>
+        <nav>
+        
+          <div class="left-items">
+          <img class="logo" src="{% static 'img/hospitalist-removebg-preview.png' %}" alt="">
+          <h1 class="header-title">HospitalistAI</h1> 
+          </div>
+
+          <div class="right-items" style="margin-right: 20px;">
+            <p style=" max-width: 100%; font-size: 80%; font-weight: bold; border-color: rgb(233, 108, 13);">Welcome {{ request.user.username }} / <a href="{% url 'logout' %}">Log out</a></p>
+            
+          </div>
+          
+        </nav>
+    </header>
+    <div id="container" style="overflow-y:auto;">
+        <div id="left-div">
+          <div style="max-height: 100%;">
+            <h1 style="color: black; font-size: 25px; font-weight: bold;">Write your discharge summaries in seconds for FREE!</h1>
+            <p style="color: rgb(105, 100, 100); font-size: 25px; font-weight: bold;">Just copy-paste your progress note and our AI will surprise you with a stunning discharge summary. </p>
+            <h1 style="color: black; font-size: 25px; font-weight: bold;">Special instructions for better results :</h1>
+            <ol style="color: rgb(105, 100, 100); font-size: 25px; font-weight: bold;">
+              <li>Omit chronic conditions from your progress note that remained unchanged during the hospital course</li>
+              <li>Please make sure your progress note has a short intro of how the patient presented (this is usually a small paragraph before you actually start writing your assessment and plan)</li>
+              <li>Please make sure that the course of antibiotics (e.g stop date), lab scripts, and other things to follow up on are mentioned in your progress note. Update your progress note before submitting and avoid conflicting statements.</li>
+              <li>HospitalistAI is pretty good at recognizing abbreviations but use them wisely</li>
+              <li>Do not use the patient’s name or any form of identification</li>
+            </ol>
+            <hr style="color: black;">
+            <form action="" method="post"  id="patientFormId">
+                {% csrf_token %}
+                {% for field in form %}
+                {% if field.field.widget.input_type == "checkbox" %}
+                {{field.label_tag}}{{field}} 
+
+                {% else %}
+                {% if field.name == "add_more" %}
+                <div>
+
+                </div>
+                {{ field.label_tag }}
+                <div id="form-control">
+                    {{ field }}
+                </div>
+                {% else %}
+                {{ field.label_tag }}
+                <div class="form-group">
+                    {{ field }}
+                </div>
+                {% endif %}
+                {% endif %}
+                {% endfor%}
+                <div class="d-grid gap-2 mt-3">
+                    <button class="btn btn-primary" type="submit" style="font-weight: bold;" onclick="loadder()">Discharge summary</button>
+                </div>
+            </form>
+          </div>
+        </div>
+        <div id="right-div">
+          
+          {% if summary %}
+          <div id="loader">
+            <div class="spinner"></div>
+            <div class="typing"><p>HospitalistAI is typing...</p></div>
+          </div>
+
+          <div style="background-color: #fff; border-radius: 10px; border: 1px solid #0275d8;" id="invoice">
+            <button id="copy-button" onclick="copyTag('downloadPDF')"  type="button" class="btn btn-link" ><span class="bi bi-clipboard" title="copy"></span>copy</button>
+
+          <h1 style="color: #0275d8; font-size: 25px; font-weight: bold; text-align: center;">Discharge Summary</h1>
+          <hr style="color: black;">
+          <!-- {% autoescape off %} -->
+            <div id="downloadPDF" style="color: rgb(105, 100, 100); font-size: 25px; font-weight: bold; padding: 15px; text-align: justify;">{{ summary|safe }}</>          
+          <!-- {% endautoescape %} -->
+            </div>
+          {% else %}
+          <div id="loader">
+            <div class="spinner"></div>
+            <div class="typing"><p>HospitalistAI is typing...</p></div>
+          </div>
+            <img id="hidden-logo" class="logo-hospitalist" src="{% static 'img/logo.png' %}" alt="">
+          
+          {% endif %}
+          
+
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <a href="" style="color: #0275d8; font-weight: bold; font-size: 25px; display: inline; text-decoration: none;" id="powered-by">
+              Powered by: HospitalistAI
+            </a> 
+          </div>
+          <div class="col-sm-6">
+            <p class="text-right">
+              <a href="terms-and-conditions.html">Terms and Conditions</a> | 
+              <a href="privacy-policy.html">Privacy Policy</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+      
+      
+</body>
+</html>

@@ -1,0 +1,240 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HospitalistAI</title>
+    <link
+      rel="shortcut icon"
+      href="{% static 'img/HOSPITASLIST.png' %}"
+      type="image/png"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <style>
+      label {
+        font-weight: bold;
+        color: black;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: rgb(88, 60, 60);
+        color: #fff;
+        padding: 20px;
+      }
+
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        margin-right: 10px;
+      }
+
+      nav #menu-icon {
+        display: none;
+        font-size: 2em;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // Get the menu icon element
+      var menuIcon = document.getElementById("menu-icon");
+
+      // Add a click event listener to the menu icon
+      menuIcon.addEventListener("click", function () {
+        var nav = document.querySelector("nav");
+        nav.classList.toggle("responsive");
+      });
+    </script>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mt-3">
+          <div class="jumbotron"></div>
+        </div>
+        {% if password_conform %}
+        <div class="col-md-4" style="position: relative">
+          <h1
+            class=""
+            style="
+              color: #0275d8;
+              font-weight: bold;
+              margin-top: 100px;
+              text-align: center;
+            "
+          >
+            Identity Verification
+          </h1>
+          <p style="color: #0275d8">
+            We have sent you a verification code on your email, please enter the
+            code to verify that's you.
+          </p>
+          <hr />
+
+          <form method="post">
+            {% if messages %} {% for message in messages %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div>
+            {% endfor %} {% endif %} {% csrf_token %} {% for field in form %} 
+            {{ field.label_tag }}
+            <div class="form-group">
+              {{ field }}
+              <span style="color: red"> {{ field.errors}}</span>
+            </div>
+            {% endfor %}
+            <div class="d-grid gap-2 mt-3">
+              <button class="btn btn-primary" type="submit">Verify</button>
+            </div>
+          </form>
+        </div>
+        {% elif reset_password_form %}
+        <div class="col-md-4" style="position: relative">
+          <h1
+            class=""
+            style="
+              color: #0275d8;
+              font-weight: bold;
+              margin-top: 100px;
+              text-align: center;
+            "
+          >
+            Enter your email
+            <address></address>
+          </h1>
+          <p style="color: #0275d8">
+            We'll send you an email containing your verification code to reset
+            your password
+          </p>
+          <hr />
+
+          <form method="post">
+            {% if messages %} {% for message in messages %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div>
+            {% endfor %} {% endif %} {% csrf_token %} {% for field in form %} 
+            {{ field.label_tag }}
+            <div class="form-group">
+              {{ field }}
+              <span style="color: red"> {{ field.errors}}</span>
+            </div>
+            {% endfor %}
+            <div class="d-grid gap-2 mt-3">
+              <button class="btn btn-primary" type="submit">Send code</button>
+            </div>
+          </form>
+        </div>
+        {% elif reset_password_complete %}
+        <div class="col-md-4" style="position: relative">
+          <h1
+            class=""
+            style="
+              color: #0275d8;
+              font-weight: bold;
+              margin-top: 100px;
+              text-align: center;
+            "
+          >
+            Set a new password
+            <address></address>
+          </h1>
+          <hr />
+
+          <form method="post">
+            {% if messages %} {% for message in messages %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div>
+            {% endfor %} {% endif %} {% csrf_token %} {% for field in form %} 
+            {{ field.label_tag }}
+            <div class="form-group">
+              {{ field }}
+              <span style="color: red"> {{ field.errors}}</span>
+            </div>
+            {% endfor %}
+            <div class="d-grid gap-2 mt-3">
+              <button class="btn btn-primary" type="submit">
+                Reset password
+              </button>
+            </div>
+          </form>
+        </div>
+        {% elif password_updated %}
+        <div class="col-md-4" style="position: relative">
+          <h1
+            class=""
+            style="
+              color: #0275d8;
+              font-weight: bold;
+              margin-top: 100px;
+              text-align: center;
+            "
+          >
+            Password Resetted Successfully
+          </h1>
+
+          {% if messages %} {% for message in messages %}
+          <div class="alert alert-success" role="alert">{{ message }}</div>
+          {% endfor %}
+          <div class="d-grid gap-2 mt-3">
+            <a href="{% url 'login' %}">
+              <button class="btn btn-primary" type="submit">
+                Login now
+              </button></a
+            >
+          </div>
+          {% endif %}
+        </div>
+
+        {% else %}
+        <div class="col-md-4" style="position: relative">
+          <h1
+            class=""
+            style="
+              color: #0275d8;
+              font-weight: bold;
+              margin-top: 100px;
+              text-align: center;
+            "
+          >
+            Account activation
+          </h1>
+          <p style="color: #0275d8">
+            We have sent you a verification code on your email, please enter the
+            code to activate your account
+          </p>
+          <hr />
+
+          <form method="post">
+            {% if messages %} {% for message in messages %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div>
+            {% endfor %} {% endif %} {% csrf_token %} {% for field in form %} 
+            {{ field.label_tag }}
+            <div class="form-group">
+              {{ field }}
+              <span style="color: red"> {{ field.errors}}</span>
+            </div>
+            {% endfor %}
+            <div class="d-grid gap-2 mt-3">
+              <button class="btn btn-primary" type="submit">Verify</button>
+            </div>
+          </form>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

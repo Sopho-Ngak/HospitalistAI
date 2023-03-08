@@ -1,0 +1,12 @@
+body {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(245, 246, 252, 0.1),
+      #0474ed
+    ),
+    url("../img/back.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+}

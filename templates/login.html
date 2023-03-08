@@ -1,0 +1,106 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Signup</title>
+    <link rel="shortcut icon" href="{% static 'img/HOSPITASLIST.png' %}" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <style>
+        label{
+            font-weight: bold;
+            color: black;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: rgb(88, 60, 60);
+            color: #fff;
+            padding: 20px;
+          }
+
+          nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 10px;
+          }
+
+          nav #menu-icon {
+            display: none;
+            font-size: 2em;
+            cursor: pointer;
+          }
+        
+    </style>
+  </head>
+  <body>
+<script>
+  // Get the menu icon element
+  var menuIcon = document.getElementById("menu-icon");
+
+  // Add a click event listener to the menu icon
+  menuIcon.addEventListener("click", function() {
+    var nav = document.querySelector("nav");
+    nav.classList.toggle("responsive");
+  });
+</script>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 mt-3">
+                <div class="jumbotron">
+
+                </div>
+        
+            </div>
+            <div class="col-md-4" style="position: relative;">
+                <h1 class="" style="color: #0275d8; font-weight: bold; margin-top: 100px; text-align: center;">Login</h1><hr>
+                {% if messages %}                
+                    {% for message in messages %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% if activation_message %}
+                <div class="alert alert-success" role="alert">
+                  <h4 class="alert-heading">Well done!</h4>
+                  <p>Your account has been activated successfully</p>
+                  <hr>
+                  <p class="mb-0">Go ahead and login now</p>
+                </div>
+                
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    {% if field.label_tag ==  'password'%}
+                        <h1>yes</h1>
+                    {% endif %}
+                    {{ field.label_tag }}
+                    <div class="form-group">
+                        {{ field }}
+                        <span style="color: red;"> {{ field.errors}}</span>
+                        
+                    </div>   
+                    {% endfor %}
+                    <div class="d-grid gap-2 mt-3">
+                        <button class="btn btn-primary" type="submit">Sign in</button>
+                    </div>
+                    <span style="color: black;">Don't have an account yet?</span> <a style="color: #d33114;" href="{% url 'signup' %}">Sign up</a><br>
+                    <a style="color: #d33114;" href="{% url 'reset-password' %}">Forgot password?</a>
+
+                    
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>
