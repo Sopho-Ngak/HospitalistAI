@@ -119,10 +119,10 @@ AUTHENTICATION_BACKENDS = [
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.hospitalistai.com'
+EMAIL_HOST = 'your host'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "hospitalistai@hospitalistai.com"
-EMAIL_HOST_PASSWORD = "junaid381381"
+EMAIL_HOST_USER = "your host user email"
+EMAIL_HOST_PASSWORD = "your email password"
 EMAIL_USE_TLS = True
 
 
