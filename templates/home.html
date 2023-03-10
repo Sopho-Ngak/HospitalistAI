@@ -103,12 +103,12 @@
             width: 40%;
             height: 100%;
           }
-          #right-div{
-            min-height: 150px;
-            max-height: 100%;
-            position: relative;
-          }
-          
+#right-div{
+  min-height: 150px;
+  max-height: 100%;
+  position: relative;
+}
+
         
           /* Make the divs responsive */
           @media (max-width: 600px) {
@@ -308,16 +308,12 @@ textarea {
     <div id="container" style="overflow-y:auto;">
         <div id="left-div">
           <div style="max-height: 100%;">
-            <h1 style="color: black; font-size: 25px; font-weight: bold;">Write your discharge summaries in seconds for FREE!</h1>
-            <p style="color: rgb(105, 100, 100); font-size: 25px; font-weight: bold;">Just copy-paste your progress note and our AI will surprise you with a stunning discharge summary. </p>
-            <h1 style="color: black; font-size: 25px; font-weight: bold;">Special instructions for better results :</h1>
-            <ol style="color: rgb(105, 100, 100); font-size: 25px; font-weight: bold;">
-              <li>Omit chronic conditions from your progress note that remained unchanged during the hospital course</li>
-              <li>Please make sure your progress note has a short intro of how the patient presented (this is usually a small paragraph before you actually start writing your assessment and plan)</li>
-              <li>Please make sure that the course of antibiotics (e.g stop date), lab scripts, and other things to follow up on are mentioned in your progress note. Update your progress note before submitting and avoid conflicting statements.</li>
-              <li>HospitalistAI is pretty good at recognizing abbreviations but use them wisely</li>
-              <li>Do not use the patient’s name or any form of identification</li>
-            </ol>
+            <h1 style="color: black; font-size: 25px; font-weight: bold;">A discharge summary so intelligent, it leaves you stunned!</h1>
+            <p style="color: rgb(105, 100, 100); font-size: 20px; font-weight: bold;">Simply copy-paste your most recent progress note, tell us where your patient is getting discharge and our AI will generate a discharge summary that is as intelligent as you. Guaranteed!</p>
+            <h1 style="color: black; font-size: 25px; font-weight: bold;">Never be scared of writing summaries on long hospital stays</h1>
+            <p style="color: rgb(105, 100, 100); font-size: 20px; font-weight: bold;">
+              Our Ai is trained in medicine. It understand common hospital lingo and even recognize common medicine abbreviations. This enables it to take your raw most recent progress note and summarize it 1-2 paragraphs - without missing any important detail. On average, if you are running a census of 15-20 patients, this will certainly save you 30-45 minutes a day. Not to mention the amount of stress it takes off your shoulders
+            </p>
             <hr style="color: black;">
             <form action="" method="post"  id="patientFormId">
                 {% csrf_token %}

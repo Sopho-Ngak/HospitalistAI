@@ -53,6 +53,10 @@ def signup(request):
 
 
 def user_login(request):
+
+    if request.user.is_authenticated:
+        return redirect('home')
+    
     form = LoginForm()
     try:
         activation_message = request.session.pop('activation_message')

@@ -61,6 +61,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'accounts.context_processors.add_variable_to_context',
             ],
         },
     },
@@ -150,6 +151,8 @@ CSRF_COOKIE_DOMAIN=None
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#CSRF_TRUSTED_ORIGINS = ['https://dc83-196-12-131-142.eu.ngrok.io']
+
 
 # if not DEBUG:
 #     #####################

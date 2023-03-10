@@ -6,12 +6,6 @@
 }
 
 
-#site-name {
-    font-family: 'whatslike-font';
-    font-size: 30px;
-    padding-left: 20px;
-}
-
 #header {
     width: auto;
     height: auto;
@@ -19,13 +13,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
-    background-color: #673a91;
+    background-color: #0275d8;
     color: var(--header-color);
     overflow: hidden;
 }
 
 div.breadcrumbs {
-    background-color: #43336d;
+    background-color: #01417a;
     padding: 10px 40px;
     border: none;
     color: var(--breadcrumbs-fg);
@@ -38,7 +32,7 @@ div.breadcrumbs {
     font-weight: 400;
     font-size: 13px;
     text-align: left;
-    background-color: #43336d;
+    background-color: #01417a;
     color: var(--header-link-color);
 }
 
@@ -54,7 +48,7 @@ div.breadcrumbs {
 }
 
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
-    background: #43336d;
+    background: #01417a;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
@@ -93,9 +87,9 @@ div.breadcrumbs {
     --selected-row: #ffc;
     --button-fg: #fff;
     --button-bg: var(--primary);
-    --button-hover-bg: #544677;
-    --default-button-bg: #43336d;
-    --default-button-hover-bg: #544677;
+    --button-hover-bg: #0275d8;
+    --default-button-bg: #0275d8;
+    --default-button-hover-bg: #0275d8;
     --close-button-bg: #888;
     --close-button-hover-bg: #747474;
     --delete-button-bg: #ba2121;
